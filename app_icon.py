@@ -128,7 +128,6 @@ class GenerateIconsEffect(inkex.Effect):
                 self.makePath(ios_path)
 
                 os.system("inkscape -o " + ios_path + "Icon-App-1024x1024@1x.png -h 1024 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-1024x1024@1x.png -h 1024 " + currentFileName)
                 os.system("inkscape -o " + ios_path + "Icon-App-83.5x83.5@2x.png -h 167 " + currentFileName)
                 os.system("inkscape -o " + ios_path + "Icon-App-76x76@2x.png -h 152 " + currentFileName)
                 os.system("inkscape -o " + ios_path + "Icon-App-76x76@1x.png -h 76 " + currentFileName)

@@ -11,6 +11,7 @@ import inkex
 from simplestyle import *
 from lxml import etree
 import os
+import subprocess
 #from pathlib import Path
 import traceback
 import sys
@@ -127,21 +128,21 @@ class GenerateIconsEffect(inkex.Effect):
             if ios_icons == "true":
                 self.makePath(ios_path)
 
-                os.system("inkscape -o " + ios_path + "Icon-App-1024x1024@1x.png -h 1024 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-83.5x83.5@2x.png -h 167 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-76x76@2x.png -h 152 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-76x76@1x.png -h 76 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-60x60@3x.png -h 180 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-60x60@2x.png -h 120 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-40x40@3x.png -h 120 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-40x40@2x.png -h 80 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-40x40@1x.png -h 40 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-29x29@3x.png -h 87 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-29x29@2x.png -h 58 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-29x29@1x.png -h 29 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-20x20@3x.png -h 60 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-20x20@2x.png -h 40 " + currentFileName)
-                os.system("inkscape -o " + ios_path + "Icon-App-20x20@1x.png -h 20 " + currentFileName)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-1024x1024@1x.png", "-h", "1024", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-83.5x83.5@2x.png", "-h", "167", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-76x76@2x.png", "-h", "152", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-76x76@1x.png", "-h", "76", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-60x60@3x.png", "-h", "180", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-60x60@2x.png", "-h", "120", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-40x40@3x.png", "-h", "120", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-40x40@2x.png", "-h", "80", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-40x40@1x.png", "-h", "40", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-29x29@3x.png", "-h", "87", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-29x29@2x.png", "-h", "58", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-29x29@1x.png", "-h", "29", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-20x20@3x.png", "-h", "60", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-20x20@2x.png", "-h", "40", currentFileName], check=True)
+                subprocess.run(["inkscape", "-o", ios_path + "Icon-App-20x20@1x.png", "-h", "20", currentFileName], check=True)
                 # inkex.errormsg(_("saving to: " + ios_path))
 
             if android_mipmap == "true" or android_drawable == "true":
@@ -169,14 +170,14 @@ class GenerateIconsEffect(inkex.Effect):
                     for DirectoryPrefix in DirectoryPrefixes:
                         FullPath = android_path + DirectoryPrefix + "-" + Density + "/" 
                         self.makePath( FullPath )
-                        os.system( "inkscape -o " + FullPath + name + ".png -h " + str( DensityInPx ) + " " + currentFileName )
+                        subprocess.run(["inkscape", "-o", FullPath + name + ".png", "-h", str(DensityInPx), currentFileName], check=True)
 
             if windows_icons == "true" or windows_one_ico_file == "true":
                 self.makePath( windows_path )
                 Resolutions = [ 256, 128, 64, 48, 32, 24, 16, 12, 8 ]
                 for Resolution in Resolutions:
                     ImagePath = windows_path + name + "-" + str( Resolution ) + ".png" 
-                    os.system("inkscape -o " + ImagePath + " -h " + str( Resolution ) + " " + currentFileName)
+                    subprocess.run(["inkscape", "-o", ImagePath, "-h", str(Resolution), currentFileName], check=True)
                     self.WindowsIconCurList.append( WindowsIconInfo( ImagePath, Resolution ) )
                 if windows_one_ico_file == "true":                
                     self.CreateIconFile( windows_path + name + ".ico", 1 )
